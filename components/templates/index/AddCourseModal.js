@@ -7,7 +7,7 @@ import styles from "@/styles/Modal.module.css";
 import { useState } from "react";
 import swal from "sweetalert";
 
-const AddCourseModal = ({ hideAddCourseModal }) => {
+const AddCourseModal = ({ hideAddCourseModal, getCourse}) => {
     const [titleCourse, setTitleCourse] = useState("")
 
 
@@ -33,11 +33,11 @@ const AddCourseModal = ({ hideAddCourseModal }) => {
                 icon: "success",
                 button: "حله"
             })
+            getCourse()
             setTitleCourse("")
             hideAddCourseModal()
         }
-        console.log(res);
-        console.log(data);
+       
     }
 
     return (

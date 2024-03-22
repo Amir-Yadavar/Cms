@@ -1,6 +1,6 @@
 import styles from "@/styles/Modal.module.css";
 
-const DeleteModal = ({ hideDeleteModal, id }) => {
+const DeleteModal = ({ hideDeleteModal, id, getCourse }) => {
   console.log(id);
 
   // deleteCourseHandler
@@ -16,8 +16,8 @@ const DeleteModal = ({ hideDeleteModal, id }) => {
         })
       })
       const result = await res.json()
-      console.log(result);
       hideDeleteModal()
+      getCourse()
     }
   }
   return (

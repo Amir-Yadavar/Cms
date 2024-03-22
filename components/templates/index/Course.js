@@ -7,7 +7,20 @@ const Course = (props) => {
   const [showAddCourseModal, setShowAddCourseModal] = useState(false);
 
   const hideAddCourseModal = () => setShowAddCourseModal(false);
-  console.log(props.dataCourse);
+  // console.log(props.dataCourse);
+
+  const [allCourse, setAllCourse] = useState([...props.dataCourse])
+  //  get course
+
+  const getCourse = async () => {
+    const res = await fetch("/api/course")
+    const result = await res.json(res)
+    if (res.status === 200) {
+
+      setAllCourse(result)
+    }
+  }
+
   return (
     <>
       <section className={styles.courses}>
@@ -22,16 +35,18 @@ const Course = (props) => {
           </a>
         </div>
         <ul className={styles.courses_list}>
-          {props.dataCourse.map(item => (
-            <CoursesItem {...item} key={item._id} />
+          {allCourse && (
+            allCourse.map(item => (
+              <CoursesItem {...item} key={item._id} getCourse={getCourse}/>
 
-          ))}
+            ))
+          )}
 
         </ul>
       </section>
 
       {showAddCourseModal && (
-        <AddCourseModal hideAddCourseModal={hideAddCourseModal} />
+        <AddCourseModal hideAddCourseModal={hideAddCourseModal} getCourse={getCourse} />
       )}
     </>
   );
